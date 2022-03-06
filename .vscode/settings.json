@@ -2,7 +2,8 @@
     "conventionalCommits.scopes": [
         "CI",
         "Generators",
-        "README"
+        "README",
+        "settings"
     ],
     "cSpell.words": [
         "Barleywine",
