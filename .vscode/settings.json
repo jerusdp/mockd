@@ -1,6 +1,15 @@
 {
     "conventionalCommits.scopes": [
         "CI",
-        "Generators"
+        "Generators",
+        "README"
+    ],
+    "cSpell.words": [
+        "Barleywine",
+        "datetime",
+        "mockd",
+        "PETNAME",
+        "Schmelerburgh",
+        "Schoen"
     ]
 }
