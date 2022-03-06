@@ -1,8 +1,47 @@
-use crate::data::address;
+//! Generate mock date addresses
+//!
+//! # Example
+//!
+//!
+//! ```rust
+//! use mockd::address;
+//!
+//! fn main() {
+//!     let data = address::info(); // address::Info struct
+//!     let data = address::street(); // street: 1128 South North Dakota borough
+//!     let data = address::street_number(); // street_number: 3155
+//!     let data = address::street_prefix(); // street_prefix: Port
+//!     let data = address::street_name(); // street_name: Kansas
+//!     let data = address::street_suffix(); // street_suffix: mouth
+//!     let data = address::city(); // city: Schmelerburgh
+//!     let data = address::state(); // state: Kentucky
+//!     let data = address::state_abr(); // state_abr: WA
+//!     let data = address::zip(); // zip: 75221
+//!     let data = address::country(); // country: Romania
+//!     let data = address::country_abr(); // country_abr: BI
+//!     let data = address::latitude(); // latitude: -69.14192
+//!     let data = address::latitude_in_range(-30 as f64, 30 as f64); // latitude_in_range: -18.35571     let data = address::longitude(); // longitude: 113.12952
+//!     let data = address::longitude_in_range(-30 as f64, 30 as f64); // longitude_in_range: -16.484156
+//! }
+//! ```
+
+pub(crate) use crate::data::address;
 use crate::misc;
 use crate::name;
 // use ::std::string::String;
 
+/// The elements of an address including
+///  address:   combines the street, city, state and zip components
+///  street:    the street name
+///  city:      the city name
+///  state:     the state name
+///  zip:       the postal code for the address
+///  country:   the country name
+///  latitude:  the latitude of the address
+///  longitude: the longitude of the address
+///
+
+#[allow(dead_code)]
 pub struct Info {
     address: String,
     street: String,
@@ -13,6 +52,52 @@ pub struct Info {
     latitude: f32,
     longitude: f32,
 }
+
+/// Create a new HcaptchaRequest from only the response string
+///
+/// # Input
+///
+/// The Hcaptcha API has two mandatory parameters:
+///     secret:     The client's secret key for authentication
+///     response:    The response code to validate
+///
+/// # Output
+///
+/// HcaptchaRequest is returned if the inputs are valid.
+/// [HcaptchaError] is returned if the validation fails.
+///
+/// # Example
+///
+/// ``` no_run
+///     use hcaptcha::HcaptchaRequest;
+/// # fn main() -> Result<(), hcaptcha::HcaptchaError>{
+///     let secret = get_your_secret();     // your secret key
+///     let response = get_response();    // Hcaptcha client response
+///
+///     let request = HcaptchaRequest::new_from_response(&secret, &response)?;
+/// # Ok(())
+/// # }
+/// # fn get_your_secret() -> String {
+/// #   "0x123456789abcde0f123456789abcdef012345678".to_string()
+/// # }
+/// # use rand::distributions::Alphanumeric;
+/// # use rand::{thread_rng, Rng};
+/// # use std::iter;
+/// # fn get_response() -> String {
+/// #    let mut rng = thread_rng();
+/// #    iter::repeat(())
+/// #        .map(|()| rng.sample(Alphanumeric))
+/// #        .map(char::from)
+/// #        .take(100)
+/// #        .collect()
+/// # }
+///  ```
+/// # Logging
+///
+/// If the tracing feature is enabled a debug level span is set for the
+/// method.
+/// The secret field will not be logged.
+///
 
 pub fn info() -> Info {
     Info {
